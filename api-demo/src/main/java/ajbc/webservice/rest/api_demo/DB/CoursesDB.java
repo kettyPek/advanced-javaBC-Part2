@@ -1,4 +1,4 @@
-package ajbc.webservice.rest.api_demo.ex1.coursesDB;
+package ajbc.webservice.rest.api_demo.DB;
 
 import java.util.Arrays;
 import java.util.HashMap;
@@ -7,7 +7,7 @@ import java.util.Map;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
-import ajbc.webservice.rest.api_demo.ex1.course.Course;
+import ajbc.webservice.rest.api_demo.models.Course;
 
 public class CoursesDB {
 	

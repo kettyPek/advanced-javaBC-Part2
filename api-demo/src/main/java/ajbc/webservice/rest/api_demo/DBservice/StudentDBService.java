@@ -3,6 +3,7 @@ package ajbc.webservice.rest.api_demo.DBservice;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 import ajbc.webservice.rest.api_demo.DB.MyDB;
 import ajbc.webservice.rest.api_demo.models.Student;
@@ -27,6 +28,8 @@ public class StudentDBService {
 	}
 	
 	public Student addStudent(Student student) {
+		if(students.get(student.getID())!=null)
+			return null;
 		students.put(student.getID(), student);
 		return student;
 	}
@@ -47,6 +50,19 @@ public class StudentDBService {
 	public Student deleteStudent(long id) {
 		return students.remove(id);
 	}
+	
+	
+	// get list of students with avarage higher than given avarage
+		public List<Student> getSudentsByAvarage(double avarage){
+			return students.values().stream().filter(s -> s.getAverage()>avarage).collect(Collectors.toList());
+		}
+		
+	// get list of students by avarage in range
+	public List<Student> getSudentsByAvarage(double minAvarage, double maxAvarage){
+		return students.values().stream().filter(s -> s.getAverage()>=minAvarage && s.getAverage()<=maxAvarage).collect(Collectors.toList());
+	}
+	
+
 
 
 }

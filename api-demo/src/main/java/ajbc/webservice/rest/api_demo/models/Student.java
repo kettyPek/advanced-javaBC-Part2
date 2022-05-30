@@ -3,8 +3,6 @@ package ajbc.webservice.rest.api_demo.models;
 import java.util.ArrayList;
 import java.util.List;
 
-import ajbc.webservice.rest.api_demo.ex1.course.Course;
-
 //class must have an empty constructor and getters and setters (javaBean)
 public class Student {
 	

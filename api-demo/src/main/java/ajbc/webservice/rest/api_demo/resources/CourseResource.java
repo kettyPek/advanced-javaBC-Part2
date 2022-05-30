@@ -1,9 +1,9 @@
-package ajbc.webservice.rest.api_demo.ex1.courses_resources;
+package ajbc.webservice.rest.api_demo.resources;
 
 import java.util.List;
 
-import ajbc.webservice.rest.api_demo.ex1.course.Course;
-import ajbc.webservice.rest.api_demo.ex1.coursesDBservice.CourseDBService;
+import ajbc.webservice.rest.api_demo.DBservice.CourseDBService;
+import ajbc.webservice.rest.api_demo.models.Course;
 import jakarta.ws.rs.Consumes;
 import jakarta.ws.rs.DELETE;
 import jakarta.ws.rs.GET;

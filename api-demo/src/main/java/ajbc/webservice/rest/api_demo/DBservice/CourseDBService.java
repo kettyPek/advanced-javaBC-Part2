@@ -1,11 +1,11 @@
-package ajbc.webservice.rest.api_demo.ex1.coursesDBservice;
+package ajbc.webservice.rest.api_demo.DBservice;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import ajbc.webservice.rest.api_demo.ex1.course.Course;
-import ajbc.webservice.rest.api_demo.ex1.coursesDB.CoursesDB;
+import ajbc.webservice.rest.api_demo.DB.CoursesDB;
+import ajbc.webservice.rest.api_demo.models.Course;
 
 public class CourseDBService {
 	
