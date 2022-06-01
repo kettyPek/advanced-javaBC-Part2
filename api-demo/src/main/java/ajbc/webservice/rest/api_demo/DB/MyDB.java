@@ -7,6 +7,7 @@ import java.util.Map;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
+import ajbc.webservice.rest.api_demo.models.Course;
 import ajbc.webservice.rest.api_demo.models.Student;
 
 public class MyDB {
@@ -33,7 +34,12 @@ public class MyDB {
 				new Student("Charles", "Samson", 78.9), 
 				new Student("Rachel", "Palace", 89.2)
 		);
-		
+		List<Course> coursesList = Arrays.asList(
+				new Course("Java"),
+				new Course("Python"), 
+				new Course("C")
+		);
+		studentList.get(0).setCourses(coursesList);
 		students = studentList.stream()
 	      .collect(Collectors.toMap(Student::getID, Function.identity()));
 	}

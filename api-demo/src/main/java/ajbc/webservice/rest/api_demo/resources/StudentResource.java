@@ -5,6 +5,7 @@ import java.util.List;
 
 import ajbc.webservice.rest.api_demo.DBservice.StudentDBService;
 import ajbc.webservice.rest.api_demo.beans.StudentFilterBean;
+import ajbc.webservice.rest.api_demo.models.Course;
 import ajbc.webservice.rest.api_demo.models.Student;
 import jakarta.ws.rs.BeanParam;
 import jakarta.ws.rs.Consumes;
@@ -102,9 +103,13 @@ public class StudentResource {
 		if(studentsFilter.getMinAvarage() >0 && studentsFilter.getMaxAvarage()>0)
 			return studentsDB.getSudentsByAvarage(studentsFilter.getAvarage());
 		return studentsDB.getAllStudents();
+	}	
+	
+	// link to another resource
+	@Path("/{id}/courses")
+	public StudentCourseResource getCoursesOfStudents(@PathParam("id") long id) {
+		return new StudentCourseResource();
 	}
-	
-	
 	
 	
 }

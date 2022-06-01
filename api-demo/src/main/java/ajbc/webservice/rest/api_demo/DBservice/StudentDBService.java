@@ -6,6 +6,7 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 import ajbc.webservice.rest.api_demo.DB.MyDB;
+import ajbc.webservice.rest.api_demo.models.Course;
 import ajbc.webservice.rest.api_demo.models.Student;
 
 public class StudentDBService {
@@ -61,8 +62,4 @@ public class StudentDBService {
 	public List<Student> getSudentsByAvarage(double minAvarage, double maxAvarage){
 		return students.values().stream().filter(s -> s.getAverage()>=minAvarage && s.getAverage()<=maxAvarage).collect(Collectors.toList());
 	}
-	
-
-
-
 }
