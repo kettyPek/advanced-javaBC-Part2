@@ -17,6 +17,10 @@ public class Location {
 	public Location() {
 	}
 
+	public Location(String name, String accessCode) {
+		this(0, name, accessCode);
+	}
+
 	public int getId() {
 		return id;
 	}

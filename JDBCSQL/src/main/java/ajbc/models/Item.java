@@ -22,6 +22,10 @@ public class Item {
 	public Item() {
 	}
 
+	public Item(String name, double unitPrice, LocalDate purchaseDate, int quantity) {
+		this(0,name,unitPrice,purchaseDate,quantity);
+	}
+
 	public int getId() {
 		return id;
 	}
