@@ -2,8 +2,11 @@ package ajbc.ex.mongodb.models;
 
 import org.bson.types.ObjectId;
 
+import com.google.gson.annotations.SerializedName;
+
 public class Chair {
 
+	@SerializedName("_id")
 	private ObjectId id;
 	private String manufacturer;
 	private String modelName;

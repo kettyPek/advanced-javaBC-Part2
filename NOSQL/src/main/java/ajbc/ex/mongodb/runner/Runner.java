@@ -19,6 +19,9 @@ import com.mongodb.client.MongoDatabase;
 import ajbc.ex.mongodb.crude.ChairDAO;
 import ajbc.ex.mongodb.models.Chair;
 import ajbc.ex.mongodb.models.Measurment;
+import ajbc.ex.mongodb.models.Pillow;
+import ajbc.ex.mongodb.models.Pillow.Color;
+import ajbc.ex.mongodb.models.Pillow.Shape;
 import ajbc.utils.MyConnectionString;
 
 public class Runner {
@@ -69,10 +72,36 @@ public class Runner {
 //			System.out.println("All chairs by manufacturers list: ");
 //			chairsByManufacturers.forEach(System.out::println);
 			
-			List<Chair> chairsUnderHeight = chairDao.getChairUnderHeight(30);
-			System.out.println("All chairs under height : ");
-			chairsUnderHeight.forEach(System.out::println);
+//			List<Chair> chairsUnderHeight = chairDao.getChairUnderHeight(30);
+//			System.out.println("All chairs under height : ");
+//			chairsUnderHeight.forEach(System.out::println);
+			
+			// Update
+//			Chair chairByID = chairDao.getChairByID("62aee08e231310338fb5abbd");
+//			chairByID.setManufacturer("IKEA-ISRAEL");
+//			chairByID.setPrice(123);
+//			chairByID.setMeasurment(new Measurment(5,5,5));
+//			Chair updatedChair = chairDao.updateChair(chairByID);
+//			System.out.println("updated chair: \n" + updatedChair);
+			
+//			Chair chairByID = chairDao.getChairByID("62aee08e231310338fb5abbd");
+//			chairByID.setManufacturer("IKEA-IKEA");
+//			chairByID.setPrice(155);
+//			Chair updatedChair = chairDao.updateChairAndReturnOldOne(chairByID);
+//			System.out.println("old chair before update : \n" + updatedChair);
 
+//			List<Chair> chairsUnderHeight = chairDao.getChairUnderHeight(100);
+//			chairsUnderHeight.stream().forEach(ch -> ch.setPrice(1000));
+//			chairDao.updateListOfChairs(chairsUnderHeight);
+			
+//			chairDao.addPillowToChair("62aee08e231310338fb5abbd", new Pillow(Shape.SQUARE,Color.BLU));
+			
+			// Delete
+//			System.out.println(chairDao.deleteChairByID("62aee08e231310338fb5abbd"));
+			
+//			chairDao.deleteChairsByManufacturer("ACE");
+			
+			chairDao.deleteChairsWithEqualOrHeigherHeight(20);
 		}
 	}
 	
