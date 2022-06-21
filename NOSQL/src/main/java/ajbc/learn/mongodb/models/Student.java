@@ -2,6 +2,7 @@ package ajbc.learn.mongodb.models;
 
 import java.util.List;
 
+import org.bson.codecs.pojo.annotations.BsonProperty;
 import org.bson.types.ObjectId;
 
 import ajbc.learn.mongodb.crud.Exam;
@@ -9,14 +10,16 @@ import ajbc.learn.mongodb.crud.Exam;
 public class Student {
 
 	private ObjectId id;
-
+	
+	@BsonProperty(value = "student_id")
 	private int studentId;
-
-	private String firstName;
-
+	@BsonProperty(value = "class_id")
 	private int classId;
-
+	@BsonProperty(value = "first_name")
+	private String firstName;
+	@BsonProperty(value = "last_name")
 	private String lastName;
+	
 	private List<Exam> exams;
 
 	public Student(ObjectId id, int studentId, int classId, String firstName, String lastName, List<Exam> exams) {
