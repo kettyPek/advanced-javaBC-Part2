@@ -77,12 +77,12 @@ public class Runner {
 //			chairsUnderHeight.forEach(System.out::println);
 			
 			// Update
-//			Chair chairByID = chairDao.getChairByID("62aee08e231310338fb5abbd");
-//			chairByID.setManufacturer("IKEA-ISRAEL");
-//			chairByID.setPrice(123);
-//			chairByID.setMeasurment(new Measurment(5,5,5));
-//			Chair updatedChair = chairDao.updateChair(chairByID);
-//			System.out.println("updated chair: \n" + updatedChair);
+			Chair chairByID = chairDao.getChairByID("62aee70410299437d105a932");
+			chairByID.setManufacturer("IKEA-ISRAEL");
+			chairByID.setPrice(123);
+			chairByID.setMeasurment(new Measurment(5,5,5));
+			Chair updatedChair = chairDao.updateChair(chairByID);
+			System.out.println("updated chair: \n" + updatedChair);
 			
 //			Chair chairByID = chairDao.getChairByID("62aee08e231310338fb5abbd");
 //			chairByID.setManufacturer("IKEA-IKEA");
@@ -101,7 +101,7 @@ public class Runner {
 			
 //			chairDao.deleteChairsByManufacturer("ACE");
 			
-			chairDao.deleteChairsWithEqualOrHeigherHeight(20);
+//			chairDao.deleteChairsWithEqualOrHeigherHeight(20);
 		}
 	}
 	

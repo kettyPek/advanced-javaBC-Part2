@@ -86,21 +86,23 @@ public class ChairDAO {
 	}
 
 	public Chair updateChair(Chair chair) {
-		// TODO can inner object be updated?
 		FindOneAndUpdateOptions optionAfter = new FindOneAndUpdateOptions().returnDocument(ReturnDocument.AFTER);
 		Document newChair = chairsCollection.findOneAndUpdate(eq("_id", chair.getId()),
 				combine(set("manufacturer", chair.getManufacturer()), set("modelName", chair.getModelName()),
-						set("isStool", chair.isStool()), set("price", chair.getPrice())),
+						set("measurment.height", chair.getMeasurment().getHeight()),
+						set("measurment.width", chair.getMeasurment().getWidth()), set("isStool", chair.isStool()),
+						set("measurment.depth", chair.getMeasurment().getDepth()), set("price", chair.getPrice())),
 				optionAfter);
 		return gson.fromJson(gson.toJson(newChair), Chair.class);
 	}
 
 	public Chair updateChairAndReturnOldOne(Chair chair) {
-		// TODO can inner object be updated?
 		FindOneAndUpdateOptions optionAfter = new FindOneAndUpdateOptions().returnDocument(ReturnDocument.BEFORE);
 		Document oldChair = chairsCollection.findOneAndUpdate(eq("_id", chair.getId()),
 				combine(set("manufacturer", chair.getManufacturer()), set("modelName", chair.getModelName()),
-						set("isStool", chair.isStool()), set("price", chair.getPrice())),
+						set("measurment.height", chair.getMeasurment().getHeight()),
+						set("measurment.width", chair.getMeasurment().getWidth()), set("isStool", chair.isStool()),
+						set("measurment.depth", chair.getMeasurment().getDepth()), set("price", chair.getPrice())),
 				optionAfter);
 		return gson.fromJson(gson.toJson(oldChair), Chair.class);
 	}
@@ -118,22 +120,22 @@ public class ChairDAO {
 
 	public Chair deleteChairByID(String id) {
 		Bson filter = eq("_id", new ObjectId(id));
-        Document doc = chairsCollection.findOneAndDelete(filter);
-        return gson.fromJson(doc.toJson(JsonWriterSettings.builder().indent(true).build()),Chair.class);
+		Document doc = chairsCollection.findOneAndDelete(filter);
+		return gson.fromJson(doc.toJson(JsonWriterSettings.builder().indent(true).build()), Chair.class);
 	}
-	
+
 	public void deleteChairsWithEqualOrHeigherHeight(int height) {
 		Bson filter = gte("measurment.height", height);
-        chairsCollection.deleteMany(filter);
-        
+		chairsCollection.deleteMany(filter);
+
 	}
-	
+
 	public void deleteChairsByManufacturer(String manufacturer) {
 		Bson filter = eq("manufacturer", manufacturer);
-        chairsCollection.deleteMany(filter);
-        
+		chairsCollection.deleteMany(filter);
+
 	}
-	
+
 	public void deleteCollection() {
 		chairsCollection.drop();
 	}
