@@ -5,8 +5,6 @@ import java.time.LocalDate;
 import org.bson.codecs.pojo.annotations.BsonProperty;
 import org.bson.types.ObjectId;
 
-import ajbc.db_project.crud.HotelDAO;
-
 public class Order {
 
 	private ObjectId id;
@@ -46,6 +44,18 @@ public class Order {
 		this.numOfNights = numOfNights;
 		this.totalPrice = totalPrice;
 		endDate = startDate.plusDays(numOfNights);
+	}
+
+	public Order(ObjectId hotelId, ObjectId customerId, LocalDate orderDate, LocalDate startDate, int numOfNights) {
+		this.hotelId = hotelId;
+		this.customerId = customerId;
+		this.orderDate = orderDate;
+		this.startDate = startDate;
+		this.numOfNights = numOfNights;
+		endDate = startDate.plusDays(numOfNights);
+	}
+
+	public Order() {
 	}
 
 	public ObjectId getId() {
@@ -88,6 +98,14 @@ public class Order {
 		this.startDate = startDate;
 	}
 
+	public LocalDate getEndDate() {
+		return endDate;
+	}
+
+	public void setEndDate(LocalDate endDate) {
+		this.endDate = endDate;
+	}
+
 	public int getNumOfNights() {
 		return numOfNights;
 	}
@@ -102,14 +120,6 @@ public class Order {
 
 	public void setTotalPrice(double totalPrice) {
 		this.totalPrice = totalPrice;
-	}
-
-	public LocalDate getEndDate() {
-		return endDate;
-	}
-
-	public void setEndDate(LocalDate endDate) {
-		this.endDate = endDate;
 	}
 
 	@Override

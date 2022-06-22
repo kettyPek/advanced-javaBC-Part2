@@ -20,18 +20,31 @@ public class OrderDAO {
 	public OrderDAO(MongoCollection<Order> orders) {
 		this.orders = orders;
 	}
-	
-	public List<Order> getOrdersByCustomerId(ObjectId customerId){
-		return orders.find(eq("customer_id",customerId)).into(new ArrayList<>());
+
+	public List<Order> getOrdersByCustomerId(ObjectId customerId) {
+		return orders.find(eq("customer_id", customerId)).into(new ArrayList<>());
 	}
-	
+
 	public long avaliableRoomsByHotelId(ObjectId hotelId, LocalDate startDate, int numOfNights) {
 		LocalDate endDate = startDate.plusDays(numOfNights);
-		Bson filter = and(eq("hotel_id",hotelId),or(
-				and(gte("end_date",endDate),lte("start_date",endDate)),
-				and(gte("end_date",startDate),lte("start_date",startDate)),
-				and(lte("end_date",endDate),gte("start_date",startDate))));
+		Bson filter = and(eq("hotel_id", hotelId),
+				or(and(gte("end_date", endDate), lte("start_date", endDate)),
+						and(gte("end_date", startDate), lte("start_date", startDate)),
+						and(lte("end_date", endDate), gte("start_date", startDate))));
 		return orders.countDocuments(filter);
+	}
+
+	public void insertOrder(Order order) {
+		orders.insertOne(order);
+	}
+
+	public void deleteById(ObjectId orderId) {
+		orders.deleteOne(eq("_id", orderId));
+
+	}
+
+	public Order getOrderById(ObjectId orderId) {
+		return orders.find(eq("_id", orderId)).first();
 	}
 
 }

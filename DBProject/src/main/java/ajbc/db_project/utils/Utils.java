@@ -46,18 +46,20 @@ public class Utils {
 		List<ObjectId> roomsFor4 = Arrays.asList(new ObjectId("62b21f11de44252d4a25597f"),
 				new ObjectId("62b21f11de44252d4a255980"), new ObjectId("62b21f11de44252d4a255981"));
 		hotels.insertMany(Arrays.asList(
-				new Hotel("Hermoso", new Address("Alenbi", 15, "Tel Aviv", "Israel"), 5, roomsFor2, 1000, null),
-				new Hotel("Lindo", new Address("Rakefet", 39, "Haifa", "Israel"), 4, roomsFor4, 3200, null),
-				new Hotel("Bello", new Address("Herzel", 24, "Eilat", "Israel"), 4, roomsFor3, 4000, null)));
+				new Hotel("Hermoso", new Address("Alenbi", 15, "Tel Aviv", "Israel"), 5, roomsFor2, 1000, new ArrayList<ObjectId>()),
+				new Hotel("Lindo", new Address("Rakefet", 39, "Haifa", "Israel"), 4, roomsFor4, 3200, new ArrayList<ObjectId>()),
+				new Hotel("Bello", new Address("Herzel", 24, "Eilat", "Israel"), 4, roomsFor3, 4000, new ArrayList<ObjectId>())));
 
 	}
 
 	public static void createCustomersCollection(MongoClient mongoClient) {
 		MongoDatabase bookingResDb = mongoClient.getDatabase("booking_reservations");
 		MongoCollection<Customer> customersCollection = bookingResDb.getCollection("customers", Customer.class);
-		List<Customer> customersList = Arrays.asList(new Customer("alon", "choen", "Israel"),
-				new Customer("david", "shalom", "Israel"), new Customer("chen", "yosef", "Israel"),
-				new Customer("mira", "heim", "Israel"));
+		List<Customer> customersList = Arrays.asList(
+				new Customer("alon", "choen", "Israel",new ArrayList<ObjectId>()),
+				new Customer("david", "shalom", "Israel",new ArrayList<ObjectId>()), 
+				new Customer("chen", "yosef", "Israel",new ArrayList<ObjectId>()),
+				new Customer("mira", "heim", "Israel",new ArrayList<ObjectId>()));
 		customersCollection.insertMany(customersList);
 	}
 

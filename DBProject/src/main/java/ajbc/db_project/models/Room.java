@@ -15,21 +15,35 @@ public class Room {
 	}
 
 	public Room(int number, boolean hasBath) {
-		super();
 		this.number = number;
 		this.hasBath = hasBath;
+	}
+
+	public Room() {
 	}
 
 	public ObjectId getId() {
 		return id;
 	}
 
+	public void setId(ObjectId id) {
+		this.id = id;
+	}
+
 	public int getNumber() {
 		return number;
 	}
 
+	public void setNumber(int number) {
+		this.number = number;
+	}
+
 	public boolean isHasBath() {
 		return hasBath;
+	}
+
+	public void setHasBath(boolean hasBath) {
+		this.hasBath = hasBath;
 	}
 
 	@Override
