@@ -1,8 +1,10 @@
 package ajbc.db_project.runner;
 
 import java.time.LocalDate;
+
 import java.util.ArrayList;
 import java.util.Arrays;
+
 import java.util.List;
 
 import org.bson.Document;
@@ -12,28 +14,23 @@ import org.bson.types.ObjectId;
 import com.mongodb.client.MongoClient;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
-import com.mongodb.client.model.Accumulators;
-import com.mongodb.client.model.Aggregates;
+
 import com.mongodb.client.model.Projections;
-import com.mongodb.client.model.Sorts;
-import com.google.gson.Gson;
 
 import ajbc.db_project.crud.CustomerDAO;
 import ajbc.db_project.crud.HotelDAO;
 import ajbc.db_project.crud.OrderDAO;
-import ajbc.db_project.crud.RoomDAO;
+
 import ajbc.db_project.models.Customer;
 import ajbc.db_project.models.Hotel;
 import ajbc.db_project.models.Order;
-import ajbc.db_project.models.Room;
 
 import static com.mongodb.client.model.Aggregates.*;
 import static com.mongodb.client.model.Accumulators.*;
 import static com.mongodb.client.model.Projections.*;
+import static com.mongodb.client.model.Sorts.*;
 
 public class BookingHandler {
-
-	private Gson gson = new Gson();
 
 	private HotelDAO hotelDAO;
 	private OrderDAO orderDAO;
@@ -94,23 +91,18 @@ public class BookingHandler {
 	}
 
 	public void getSortedHotelsByIncome() {
-		Bson group = group("$hotel_id",sum("income","$total_price"));
-		Bson sort = sort(Sorts.descending("income"));
-		List<Document> sortedHotelIds =  ordersDocCollection.aggregate(Arrays.asList(group,sort)).into(new ArrayList<>());
-		sortedHotelIds.forEach(System.out::println);
+		Bson group = group("$hotel_id", sum("income", "$total_price"));
+		Bson sort = sort(descending("income"));
+		ordersDocCollection.aggregate(Arrays.asList(group, sort)).into(new ArrayList<>())
+				.forEach(id -> System.out.println(id));
+
 	}
 
-	public void sumOfAllOrders() {
+	public double sumOfAllOrders() {
 
 		Document sumOfOrders = ordersDocCollection.aggregate(Arrays.asList(group(null, sum("income", "$total_price")),
 				project(fields(Projections.include("income"), Projections.excludeId())))).first();
-		System.out.println(sumOfOrders);
+		return sumOfOrders.getDouble("income");
 	}
-	
-	public void profitbleMonths(int top) {
-		Bson group = group(dataToString(("date",dateFromString("dateString", "$start_date")),("format","%Y-%m")));
-		List<Document> proMonths = ordersDocCollection.aggregate(Arrays.asList(null)).into(new ArrayList<>());
-	}
-
 
 }
