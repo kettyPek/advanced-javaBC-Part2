@@ -41,12 +41,12 @@ public class Runner {
 //			System.out.println(emp6);
 //			System.out.println(emp7);
 			
-			System.out.println("Deleted empolyees");
-			Employee emp8 = dbService.DeleteEmployee(connection, 1099);
-			Employee emp9 = dbService.DeleteEmployee(connection, 1012);
-			
-			System.out.println(emp8);
-			System.out.println(emp9);
+//			System.out.println("Deleted empolyees");
+//			Employee emp8 = dbService.DeleteEmployee(connection, 1099);
+//			Employee emp9 = dbService.DeleteEmployee(connection, 1012);
+//			
+//			System.out.println(emp8);
+//			System.out.println(emp9);
 			
 			
 		}catch(SQLException e){

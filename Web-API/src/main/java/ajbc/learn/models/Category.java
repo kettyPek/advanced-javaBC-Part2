@@ -7,6 +7,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -27,6 +29,7 @@ public class Category {
 	@Column(name = "categoryName")
 	private String catName;
 	private String description;
+	@JsonIgnore
 	private byte[] picture;
 
 }

@@ -25,46 +25,44 @@ public class RunnerProduct {
 		// The spring container
 		AnnotationConfigApplicationContext ctx = new AnnotationConfigApplicationContext(AppConfig.class);
 
-		JdbcProductDao jdbcProductDao = new JdbcProductDao();
-
-		jdbcProductDao.setTemplate(ctx.getBean(JdbcTemplate.class));
+		JdbcProductDao dao = ctx.getBean("jdbcDao",JdbcProductDao.class);
 
 		Product product = new Product("Malabi", 1, 3, "2 units", 10.5, 20, 5, 7, 4);
 
-//		jdbcProductDao.addProduct(product);
+//		dao.addProduct(product);
 
 //		product.setProductId(78);
 //		product.setUnitPrice(9.5);
 //		product.setProductName("MalabiD");
-//		jdbcProductDao.updateProduct(product);
+//		dao.updateProduct(product);
 
-//		Product product2 = jdbcProductDao.getProduct(3);
+//		Product product2 = dao.getProduct(3);
 //		System.out.println(product2);
 
-//		jdbcProductDao.deleteProduct(78);
+//		dao.deleteProduct(78);
 
-//		List<Product> products = jdbcProductDao.getAllProducts();
+//		List<Product> products = dao.getAllProducts();
 //		products.forEach(System.out::println);
 
-//		List<Product> productsByRange = jdbcProductDao.getProductsByPriceRange(5.0,10.0);
+//		List<Product> productsByRange = dao.getProductsByPriceRange(5.0,10.0);
 //		productsByRange.forEach(System.out::println);
 
-//		List<Product> productsByCategoty = jdbcProductDao.getProductsInCategory(3);
+//		List<Product> productsByCategoty = dao.getProductsInCategory(3);
 //		productsByCategoty.forEach(System.out::println);
 
-//		List<Product> productsNotInStock = jdbcProductDao.getProductsNotInStock();
+//		List<Product> productsNotInStock = dao.getProductsNotInStock();
 //		productsNotInStock.forEach(System.out::println);
 
-//		List<Product> productsOnOrder = jdbcProductDao.getProductsOnOrder();
+//		List<Product> productsOnOrder = dao.getProductsOnOrder();
 //		productsOnOrder.forEach(System.out::println);
 		
-//		List<Product> productsDiscontinued= jdbcProductDao.getDiscontinuedProducts();
+//		List<Product> productsDiscontinued= dao.getDiscontinuedProducts();
 //		productsDiscontinued.forEach(System.out::println);
 		
-		long rows = jdbcProductDao.count();
+		long rows = dao.count();
 		System.out.println("There is " + rows + " products");
 		
-		
+		ctx.close();
 
 	}
 

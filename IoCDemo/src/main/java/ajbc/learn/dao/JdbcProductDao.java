@@ -68,15 +68,12 @@ public class JdbcProductDao implements ProductDao {
 	@Override
 	public Product getProduct(Integer productId) throws DaoException {
 		String sql = "select * from Products where productId=?";
-		Product product = template.queryForObject(sql, rowMapper, productId);
-		if (product == null)
-			throw new DaoException("getting product from DB by ID - failed");
-		return product;
+		return template.queryForObject(sql, rowMapper, productId);
 	}
 
 	@Override
 	public void deleteProduct(Integer productId) throws DaoException {
-		String sql = "delete from Products where productId=?";
+		String sql = "update Products set discontinued = 1 where productId = ?";
 		int changedRows = template.update(sql, productId);
 		if (changedRows == 0)
 			throw new DaoException("Deleting product - failed");
@@ -86,62 +83,43 @@ public class JdbcProductDao implements ProductDao {
 	@Override
 	public List<Product> getAllProducts() throws DaoException {
 		String sql = "select *  from Products ";
-		List<Product> products = template.query(sql,rowMapper);
-		if(products == null)
-			throw new DaoException("Getting all products - failed");
-		return products;
+		return template.query(sql,rowMapper);
 	}
 
 	@Override
 	public List<Product> getProductsByPriceRange(Double min, Double max) throws DaoException {
 		String sql = "select *  from Products where unitPrice >= ? and unitPrice <= ? ";
-		List<Product> products = template.query(sql, rowMapper, min, max);
-		if(products == null)
-			throw new DaoException("Quety failed");
-		return products;
+		return template.query(sql, rowMapper, min, max);
 	}
 
 	@Override
 	public List<Product> getProductsInCategory(Integer categoryId) throws DaoException {
 		String sql = "select *  from Products where categoryId = ? ";
-		List<Product> products = template.query(sql, rowMapper, categoryId);
-		if(products == null)
-			throw new DaoException("Quety failed");
-		return products;
+		return template.query(sql, rowMapper, categoryId);
 	}
 
 	@Override
 	public List<Product> getProductsNotInStock() throws DaoException {
 		String sql = "select *  from Products where unitsInStock = 0 ";
-		List<Product> products = template.query(sql, rowMapper);
-		if(products == null)
-			throw new DaoException("Quety failed");
-		return products;
+		return template.query(sql, rowMapper);
 	}
 
 	@Override
 	public List<Product> getProductsOnOrder() throws DaoException {
 		String sql = "select *  from Products where unitsOnOrder != 0 ";
-		List<Product> products = template.query(sql, rowMapper);
-		if(products == null)
-			throw new DaoException("Quety failed");
-		return products;
+		return template.query(sql, rowMapper);
 	}
 
 	@Override
 	public List<Product> getDiscontinuedProducts() throws DaoException {
 		String sql = "select *  from Products where discontinued != 0 ";
-		List<Product> products = template.query(sql, rowMapper);
-		if(products == null)
-			throw new DaoException("Quety failed");
-		return products;
+		return template.query(sql, rowMapper);
 	}
 
 	@Override
 	public long count() throws DaoException {
 		String sql = "select count(*) from Products ";
-		Long count = template.queryForObject(sql, long.class);
-		return count;
+		return template.queryForObject(sql, long.class);
 	}
 	
 
