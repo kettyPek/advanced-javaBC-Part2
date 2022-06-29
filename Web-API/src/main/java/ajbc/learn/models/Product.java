@@ -36,7 +36,7 @@ public class Product {
 	@Column(insertable = false, updatable = false)
 	private Integer supplierId;
 	
-	@ManyToOne(cascade = {CascadeType.PERSIST,CascadeType.MERGE})
+	@ManyToOne(cascade = {CascadeType.MERGE})
 	@JoinColumn(name = "supplierId")
 	private Supplier supplier;
 	
@@ -44,7 +44,7 @@ public class Product {
 	@Column(insertable = false, updatable = false)
 	private Integer categoryId;
 	
-	@ManyToOne(cascade = {CascadeType.PERSIST,CascadeType.MERGE})
+	@ManyToOne(cascade = {CascadeType.MERGE})
 	@JoinColumn(name = "categoryId")
 	private Category category;
 	
