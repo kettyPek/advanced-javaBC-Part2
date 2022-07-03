@@ -9,6 +9,8 @@ import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.orm.hibernate5.HibernateTemplate;
 import org.springframework.stereotype.Component;
+
+import ajbc.learn.models.Category;
 import ajbc.learn.models.Product;
 
 @SuppressWarnings("unchecked")
@@ -68,6 +70,14 @@ public class HibernateTemplateProductDao implements ProductDao{
 		criteria.add(criterion);
 		return(List<Product>) template.findByCriteria(criteria);
 	}
+	
+	@Override
+	public List<Product> getProductsBySupplier(Integer supplierId) throws DaoException {
+		DetachedCriteria criteria = DetachedCriteria.forClass(Product.class);
+		Criterion criterion = Restrictions.eq("supplierId", supplierId);
+		criteria.add(criterion);
+		return(List<Product>) template.findByCriteria(criteria);
+	}
 
 	@Override
 	public List<Product> getProductsNotInStock() throws DaoException {
@@ -96,6 +106,31 @@ public class HibernateTemplateProductDao implements ProductDao{
 		criteria.setProjection(Projections.rowCount());
 		return (long)template.findByCriteria(criteria).get(0);
 	}
+	
+	@Override
+	public void deleteCategoryById(int categoryId) throws DaoException{
+		List<Product> products = getProductsInCategory(categoryId);
+		for(int i=0; i<products.size();i++) {
+			products.get(i).setCategoryId(null);
+			products.get(i).setCategory(null);
+			updateProduct(products.get(i));
+		}
+	}
+	
+	@Override
+	public void deleteSupplierById(int supplierId) throws DaoException{
+		List<Product> products = getProductsBySupplier(supplierId);
+		for(int i=0; i<products.size();i++) {
+			products.get(i).setSupplier(null);
+			products.get(i).setSupplierId(null);
+			updateProduct(products.get(i));
+		}
+	}
+
+	
+
+	
+	
 	
 	
 

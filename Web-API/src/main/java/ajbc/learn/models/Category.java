@@ -26,10 +26,15 @@ public class Category {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int categoryId;
+	
 	@Column(name = "categoryName")
 	private String catName;
+	
 	private String description;
+	
 	@JsonIgnore
 	private byte[] picture;
+	
+	private Integer inactive;
 
 }
